@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Perfil de Usuario</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+
+<body>
+  <div class="profile">
+    <div class="profile-container">
+      <h2 class="profile-title">Perfil de Usuario</h2>
+      <div class="profile-info">
+        <div class="profile-item">
+          <label for="nombre" class="profile-label">Nombre:</label>
+          <span id="nombre" class="profile-value">{{sessionData.nombre}}</span>
+        </div>
+        <div class="profile-item">
+          <label for="apellido" class="profile-label">Apellido:</label>
+          <span id="apellido" class="profile-value">{{sessionData.apellido}}</span>
+        </div>
+        <div class="profile-item">
+          <label for="email" class="profile-label">Correo Electrónico:</label>
+          <span id="email" class="profile-value">{{sessionData.email}}</span>
+        </div>
+        <div class="profile-item">
+          <label for="edad" class="profile-label">Edad:</label>
+          <span id="edad" class="profile-value">{{sessionData.age}}</span>
+        </div>
+        <div class="profile-item">
+          <label for="rol" class="profile-label">Rol:</label>
+          <span id="rol" class="profile-value">{{sessionData.rol}}</span>
+        </div>
+        <div class="profile-item">
+          <a href="/createproducts" class="product-link">Gestionar Productos</a>
+        </div>
+        <div class="profile-item">
+          <a href="/adminuser" class="product-link">Gestionar Usuarios</a>
+        </div>
+        <div class="go-to-logout-products">
+          <button id="logoutButton">Cerrar Sesión</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

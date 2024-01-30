@@ -1,0 +1,33 @@
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Carrito</title>
+</head>
+
+<body>
+  <h1 class="tituloProducto">Carrito de Compras</h1>
+  <p class="idCarrito">Identificador de carrito:</p>
+  <p class="idCarrito"><strong>{{productsInTheCart.carrito._id}}</strong></p>
+  <a href="/products">Volver a los productos</a></br>
+
+  <div class="cart-container">
+    <ul>
+      {{#each productsInTheCart.carrito.products}}
+      <li class="cart-item">
+        <span class="product-title">{{this.product.title}}</span><br />
+        Precio: $<span class="product-price">{{this.product.price}}</span><br />
+        Cantidad:<span class="product-quantity">{{this.quantity}}</span><br />
+        Total: $<span class="product-total" data-quantity="{{this.quantity}}" data-price="{{this.product.price}}"></span>
+      </li>
+      {{/each}}
+    </ul>
+  </div>
+  <p class="cart-total">Total del carrito: $<span id="cartTotal"></span></p>
+  <button class="button-buy" id="button-buy" data-cart-id="{{productsInTheCart.carrito._id}}">Procesar Compra</button>
+
+  <script src="/js/client.js"></script>
+
+</body>
+</html>

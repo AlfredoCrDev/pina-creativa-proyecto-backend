@@ -1,0 +1,127 @@
+paths:
+  /cart/:
+    get:
+      summary: Obtiene todos los carritos
+      tags:
+        - Carts
+      responses:
+        '200':
+          description: Respuesta exitosa
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: 'src/models/carts.model.js'
+        '500':
+          description: Error interno del servidor 
+
+    post:
+      summary: Crea un nuevo carrito
+      tags:
+        - Carts
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              description: Array vacío para crear un nuevo carrito
+              items: {}
+      responses:
+        '200':
+          description: Carrito creado exitosamente
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: Mensaje de éxito
+                  cart:
+                    $ref: 'src/models/carts.model.js'
+        '500':
+          description: Error interno del servidor
+          content:
+            application/json:
+              example:
+                message: Error al crear un nuevo carrito
+
+  /cart/{cid}:
+    get:
+      summary: Obtiene los datos del carrito por ID
+      tags:
+        - Carts
+      parameters:
+        - in: path
+          name: cid
+          required: true
+          description: Identificador único del carrito.
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Datos del Carrito.
+          content:
+            application/json:
+              schema:
+                $ref: 'src/models/carts.model.js'
+        "404":
+          description: No se ha encontrado el carrito con ese ID.
+        "500":
+          description: Error interno del servidor.
+
+    delete:
+      summary: Eliminar un carrito por ID
+      description: Elimina un carrito según su ID
+      tags:
+        - Carts
+      parameters:
+        - in: path
+          name: cid
+          required: true
+          description: Identificador único del carrito.
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Carrito eliminado con éxito.
+          content:
+            application/json:
+              schema:
+                $ref: 'src/models/carts.model.js'
+        "404":
+          description: No se ha encontrado el carrito con ese ID.
+        "500":
+          description: Error interno del servidor.
+
+  /cart/{cid}/product/{pid}:
+    post:
+      summary: Agrega un producto al carrito
+      tags:
+        - Cart
+      parameters:
+        - in: path
+          name: cid
+          required: true
+          description: Identificador único del carrito.
+          schema:
+            type: string
+        - in: path
+          name: pid
+          required: true
+          description: Identificador único del producto.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Producto agregado exitosamente al carrito
+          content:
+            application/json:
+              schema:
+                $ref: 'src/models/carts.model.js'
+        '404':
+          description: No se ha encontrado el carrito o el producto con esos IDs.
+        '500':
+          description: Error interno del servidor

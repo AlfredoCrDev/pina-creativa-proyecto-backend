@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Produtos</title>
+</head>
+
+<body data-cart="{{cart}}">
+  <input type="hidden" id="user" value={{email}}>
+
+  <h1 class="tituloProducto">Lista de Productos</h1>
+  <h4 class="tituloProducto">Bienvenido: {{email}}</h4>
+  <h4 class="tituloProducto">Rol: {{rol}}</h4>
+  <h4 class="tituloProducto">Carrito: {{cart}}</h4>
+  {{!-- <button class="go-to-cart-button" data-product-id="{{this._id}}">Ir a Carrito</button> --}}
+  <div class="go-to-logout-products">
+  <a href="/email">Enviar un mensaje</a></br>
+  </div>
+  <div class="go-to-logout-products">  
+    <a href="/carrito/{{cart}}">Ir a Carrito</a>
+  </div>
+  <div class="go-to-logout-products">
+    <a href="/upload/{{userId}}">Subir documentación</a>
+  </div>
+  <div class="go-to-logout-products">
+    <button id="logoutButton">Cerrar Sesión</button>
+  </div>
+  <div class="container">
+    {{#each products.docs}}
+    <div class="product-card">
+      <h2 class="product-title">{{this.title}}</h2>
+      <p class="product-description">{{this.description}}</p>
+      <p class="product-price">$ {{this.price}}</p>
+      {{!-- <a href="/products/{{this._id}}" target="_blank"><button type="submit">Ver más...</button></a>--> --}}
+      <button class="add-to-cart-button" data-product-id="{{this._id}}">Agregar al carrito</button>
+      {{!-- <a href="/cart/{{../cart}}/product={{this._id}}" class="add-to-cart-link">Agregar al carrito</a> --}}
+    </div>
+    {{/each}}
+  </div>
+<div class="pagination">
+  {{#if products.hasPrevPage}}
+  <a href="/products?limit={{products.limit}}&page={{products.prevPage}}" class="page-link">Página anterior</a>
+  {{/if}}
+
+  <span class="page-info">Página {{products.page}} de {{products.totalPages}}</span>
+
+  {{#if products.hasNextPage}}
+  <a href="/products?limit={{products.limit}}&page={{products.nextPage}}" class="page-link">Página siguiente</a>
+  {{/if}}
+</div>
+
+  <script src="/js/client.js"></script>
+</body>
+
+</html>

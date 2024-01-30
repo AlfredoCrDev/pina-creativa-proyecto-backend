@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="login">
+    <div class="login-container">
+      <h2 class="login-title">Iniciar Sesión</h2>
+      <form id="loginForm">
+        <div class="form-group">
+          <label for="email" class="login-label">Usuario</label>
+          <input type="text" id="email" name="email" class="login-input" required placeholder="Escriba su correo"">
+        </div>
+        <div class="form-group">
+          <label for="password" class="login-label">Contraseña</label>
+          <input type="password" id="password" name="password" class="login-input" required placeholder="Contraseña">
+        </div>
+        <button type="submit" class="login-button">Iniciar Sesión</button>
+      </form>
+      <div class="go-to-register">
+        <a href="/register">¿No tienes una cuenta? Regístrate aquí</a>
+      </div>
+      <div class="go-to-register">
+        <a href="/forgot-password">Recuperar contraseña</a>
+      </div>
+      <div class="go-to-registerRSS">
+        <button>
+          <a href="/github">Iniciar sesión con Github</a>
+        </button>
+      </div>
+    </div>
+    </div>
+    <script src="./js/client.js"></script>
+</body>
+</html>

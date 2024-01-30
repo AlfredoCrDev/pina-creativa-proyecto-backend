@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{title}}</title>
+</head>
+<body data-user="{{userId}}">
+    
+    <h1>Subir archivos</h1>
+    <form id="uploadForm" enctype="multipart/form-data">
+        <label for="profileImage">Imagen de Perfil:</label>
+        <input type="file" name="profileImage" accept="image/*" multiple>
+        
+        <label for="productImage">Imagen de Producto:</label>
+        <input type="file" name="productImage" accept="image/*" multiple>
+        
+        <label for="document">Documentos:</label>
+        <input type="file" name="document" accept=".pdf, .doc, .docx" multiple>
+        <p>Se requieren 3 documentos para pasar usuario a premium (estado de cuenta, identificacion y comprobante de domicilio)</p>
+        
+        <button type="submit">Subir Archivo</button>
+    </form>
+
+    <script src="/js/client.js"></script>
+</body>
+</html>

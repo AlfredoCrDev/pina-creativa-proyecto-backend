@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{title}}</title>
+</head>
+
+<body>
+
+    <h1>Lista de Productos en tiempo Real</h1>
+    <input type="hidden" id="user" value={{user.email}}>
+    <input type="hidden" id="rol" value={{user.rol}}>
+    <h3>Usuario: {{user.email}}</h3>
+    <h3>Rol: {{user.rol}}</h3>
+    <a href="/profile">Volver al perfil</a></br>
+    <a href="/products">Ir a tienda</a></br>
+    <div class="go-to-logout-products">
+        <button id="logoutButton">Cerrar Sesión</button>
+    </div>
+    <!-- Formulario para agregar un producto -->
+    <form id="formulario-agregar">
+        <h2>Agregar Producto</h2>
+        <label for="titulo">Título:</label>
+        <input type="text" id="title" name="titulo" class="login-input" required>
+
+        <label for="descripcion">Descripción:</label>
+        <input type="text" id="description" name="descripcion" class="login-input" required>
+
+        <label for="precio">Precio:</label>
+        <input type="number" id="price" name="precio" class="login-input" required>
+
+        <label for="stock">Stock:</label>
+        <input type="number" id="stock" name="stock" class="login-input" required>
+
+        <label for="codigo">Código:</label>
+        <input type="text" class="login-input" id="code" name="codigo" required>
+
+        <label for="category">Categoria:</label>
+        {{!-- <input type="text" id="category" name="category" required> --}}
+
+        <select name="category" id="category" class="login-input">
+            <option value="Bebida">Bebida</option>
+            <option value="Granos">Granos</option>
+            <option value="Carnes">Carnes</option>
+            <option value="Lacteos">Lacteos</option>
+            <option value="Hogar">Hogar</option>
+            <option value="Verduras">Verduras</option>
+            <option value="Snacks">Snacks</option>
+            <option value="Panaderia">Panaderia</option>
+            <option value="Frutas">Frutas</option>
+            <option value="Limpieza">Limpieza</option>
+            <option value="Pescados">Pescados</option>
+            <option value="Alimentos">Alimentos</option>
+        </select>
+
+        <button type="submit">Agregar Producto</button>
+    </form>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Título</th>
+                <th>Descripción</th>
+                <th>Precio</th>
+                <th>Stock</th>
+                <th>Codigo</th>
+                <th>Imagen</th>
+                <th>Categoria</th>
+                <th>Status</th>
+                <th>Owner</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each productos.docs}}
+            <tr>
+                <td>{{this._id}}</td>
+                <td>{{this.title}}</td>
+                <td>{{this.description}}</td>
+                <td>$ {{this.price}}</td>
+                <td>{{this.stock}}</td>
+                <td>{{this.code}}</td>
+                <td>{{this.thumbail}}</td>
+                <td>{{this.category}}</td>
+                <td>{{this.status}}</td>
+                <td>{{this.owner}}</td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+
+    <form id="formulario-eliminar">
+        <h2>Eliminar Producto</h2>
+        <label for="idProduct">Ingrese el ID del producto:</label>
+        <input type="text" id="idProduct" name="idProduct" class="login-input" required>
+        <button type="submit">Eliminar Producto</button>
+    </form>
+
+    {{!--
+    <script src="/socket.io/socket.io.js"></script> --}}
+    <script src="/js/client.js"></script>
+
+</body>
+
+</html>

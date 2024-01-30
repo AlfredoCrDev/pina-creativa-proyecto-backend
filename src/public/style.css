@@ -1,0 +1,463 @@
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+th, td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+th {
+    background-color: #f2f2f2;
+}
+tr:hover {
+    background-color: #f5f5f5;
+}
+
+/* Estilo para el contenedor principal del formulario */
+form {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #0074cc;
+    color: white;
+    border-radius: 10px; 
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Estilo para las etiquetas */
+  label {
+    display: block; 
+    margin-bottom: 7px;
+    font-size: 1.2rem;
+  }
+  
+  /* Estilo para el input de archivo */
+  input[type="file"] {
+    border: none;
+    padding: 10px; 
+    border-radius: 5px; 
+    width: 100%;
+  }
+  
+  /* Estilo para el botón */
+  button[type="submit"] {
+    background-color: #0059b3; 
+    color: white; 
+    padding: 10px 20px; 
+    border: none; 
+    border-radius: 5px; 
+    cursor: pointer; 
+  }
+  
+  /* Cambiar el color del botón al pasar el ratón sobre él */
+  button[type="submit"]:hover {
+    background-color: #004080; 
+  }
+
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+  }
+  
+ul {
+  list-style: none;
+}
+
+.container, .tituloProducto, .idCarrito {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: space-between;
+}
+
+.product-card {
+    background-color: #fff;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    padding: 20px;
+    flex: 1;
+    max-width: calc(33.33% - 20px);
+}
+
+.product-description {
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+.product-price {
+    margin-top: 10px;
+    font-size: 16px;
+    color: #007bff;
+}
+
+.add-to-cart-button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.add-to-cart-button:hover {
+    background-color: #0056b3;
+}
+
+.cart-container {
+  text-align: center;
+  padding: 20px;
+}
+
+.cart-item {
+  background-color: #f4f4f4;
+  border: 1px solid #ddd;
+  margin: 10px 0;
+  padding: 10px;
+}
+
+.cart-item:hover {
+  background-color: #e0e0e0;
+}
+
+.product-title {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.product-quantity {
+  font-size: 14px;
+}
+
+/* Estilos para la paginación */
+.pagination {
+  margin: 20px 0;
+  text-align: center;
+}
+
+.page-link {
+  text-decoration: none;
+  padding: 5px 10px;
+  background-color: #007BFF;
+  color: #fff;
+  margin: 5px;
+  border-radius: 5px;
+}
+
+.page-info {
+  margin: 0 20px;
+}
+
+/* Estilos para la lista de productos */
+.product-list {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.product-item {
+  border: 1px solid #ddd;
+  margin: 10px;
+  padding: 10px;
+  width: 200px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background: #fff;
+}
+
+.go-to-logout-products {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: space-between;
+  text-decoration: none;
+  color: #007BFF;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+/* LOGIN */
+
+.login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  background-color: #f2f2f2;
+}
+
+.login-container {
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  width: 300px;
+  text-align: center;
+}
+
+.login-title {
+  margin-bottom: 20px;
+  font-size: 1.5rem;
+}
+
+.form-group {
+  text-align: left;
+  margin-bottom: 10px;
+}
+
+.login-label {
+  display: block;
+  font-weight: 600;
+}
+
+.login-input {
+  width: 90%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  font-size: 1rem;
+}
+
+.login-button {
+  width: 100%;
+  padding: 10px;
+  background-color: #007BFF;
+  color: #fff;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s;
+}
+
+.login-button:hover {
+  background-color: #0056b3;
+}
+
+.go-to-register {
+  margin-top: 20px;
+  text-align: center;
+    && a {
+      text-decoration: none;
+      color: #007BFF;
+      font-weight: 600;
+      font-size: 0.9rem;
+        &:hover {
+          text-decoration: underline;
+      }
+    }
+}
+
+.go-to-registerRSS {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.go-to-registerRSS button{
+  background-color: black;
+  height: 40px;
+  border-radius: 8px;
+  && a {
+    color: white;
+  }
+}
+
+/*FORMULARIO DE REGISTRO */
+.register {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  background-color: #f2f2f2;
+}
+
+.register-container {
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  width: 300px;
+  text-align: center;
+}
+
+.register-title {
+  margin-bottom: 20px;
+  font-size: 1.5rem;
+}
+
+.form-group {
+  text-align: left;
+  margin-bottom: 10px;
+}
+
+.register-label {
+  display: block;
+  font-weight: 600;
+}
+
+.register-input {
+  width: 90%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  font-size: 1rem;
+}
+
+.register-button {
+  width: 100%;
+  padding: 10px;
+  background-color: #007BFF;
+  color: #fff;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s;
+}
+
+.register-button:hover {
+  background-color: #0056b3;
+}
+
+.back-to-login {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.back-to-login a {
+  text-decoration: none;
+  color: #007BFF;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.back-to-login a:hover {
+  text-decoration: underline;
+}
+
+/* Estilos para la vista de perfil */
+.profile {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.profile-container {
+  background-color: #f0f0f0;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  max-width: 400px;
+  width: 100%;
+}
+
+.profile-title {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.profile-info {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  margin-top: 10px;
+}
+
+.profile-item {
+  margin-bottom: 10px;
+}
+
+.profile-label {
+  font-weight: bold;
+}
+
+.profile-value {
+  color: #333;
+}
+
+/* Estilos para el enlace de "Ir a Productos" en la vista de perfil */
+.product-link {
+  display: inline-block;
+  background-color: #007BFF;
+  color: #fff;
+  padding: 10px 20px;
+  text-decoration: none;
+  border-radius: 5px;
+  margin-top: 10px;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+
+.product-link:hover {
+  background-color: #0056b3;
+}
+
+/* HBS de error */
+
+.error-container {
+  text-align: center;
+  padding: 20px;
+  background-color: red;
+  color: white;
+  font-size: 18px;
+  border: 1px solid #d32f2f;
+  border-radius: 5px;
+  margin: 20px auto;
+  max-width: 400px;
+}
+
+.error-container h1, .info-container h1 {
+  font-size: 24px;
+  margin: 0;
+  padding: 0;
+}
+
+.error-container p, .info-container p {
+  margin: 10px 0;
+}
+
+.error-container a {
+  color: #ffee58;
+  text-decoration: underline;
+}
+
+.error-container a:hover {
+  color: #ffca28;
+}
+
+/* HBS de Informacion */
+
+.info-container {
+  text-align: center;
+  padding: 20px;
+  background-color: blue;
+  color: white;
+  font-size: 18px;
+  border: 1px solid blue;
+  border-radius: 5px;
+  margin: 20px auto;
+  max-width: 400px;
+}
+
+.info-container a {
+  color: white;
+  text-decoration: underline;
+}
+
+.info-container a:hover {
+  color: yellowgreen;
+}

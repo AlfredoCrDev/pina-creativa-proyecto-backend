@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{title}}</title>
+</head>
+
+<body>
+
+    <h1>Lista de Usuarios en tiempo Real</h1>
+    <input type="hidden" id="user" value={{user.email}}>
+    <input type="hidden" id="rol" value={{user.rol}}>
+    <h3>Usuario: {{user.email}}</h3>
+    <h3>Rol: {{user.rol}}</h3>
+    <a href="/profile">Volver al perfil</a></br>
+    <div class="go-to-logout-products">
+        <button id="logoutButton">Cerrar Sesión</button>
+    </div>
+    <!-- Formulario para eliminar usuario -->
+    <form id="formulario-eliminar">
+        <h2>Eliminar Usuario</h2>
+        <label for="idProduct">Ingrese el ID del Usuario:</label>
+        <input type="text" id="idProduct" name="idProduct" class="login-input" required>
+        <button type="submit">Eliminar Producto</button>
+    </form>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Correo</th>
+                <th>Tipo de Cuenta</th>
+                <th>Cambiar Rol</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each users.payload}}
+            <tr>
+                <td>{{this._id}}</td>
+                <td>{{this.first_name}}</td>
+                <td>{{this.last_name}}</td>
+                <td>{{this.email}}</td>
+                <td>{{this.rol}}</td>
+                <td>
+                  <button class="btn-changeRol" data-user-id="{{this._id}}">Cambiar</button>
+                </td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+
+    <script src="/js/client.js"></script>
+
+</body>
+
+</html>
