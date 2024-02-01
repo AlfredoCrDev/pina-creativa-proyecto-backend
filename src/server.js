@@ -7,15 +7,11 @@ const swaggerJsdoc = require("swagger-jsdoc");
 const SwaggerUiExpress = require("swagger-ui-express")
 const upload = require("./multer/multerConfig.js")
 
-// Importar Controladores para Socket
-const ProductController = require("./controllers/productController.js");
-const productController = new ProductController();
+// Cargar variables de entorno
+require('dotenv').config();
 
 // Importando funcion de conexion de la db
 const connectDB = require("./config/db.js")
-
-// Cargar variables de entorno
-require('dotenv').config();
 
 // Importando Rutas
 const userRoutes = require('./routes/user.router.js');
@@ -42,8 +38,6 @@ app.use(express.static(path.join(__dirname, "public")));
 
 // Ejecutando funcion de conexion a la Base de datos
 connectDB();
-
-const PORT = process.env.PORT
 
 const swaggerOptions = {
   definition:{

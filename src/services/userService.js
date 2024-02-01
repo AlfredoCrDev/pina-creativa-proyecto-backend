@@ -1,11 +1,9 @@
 const UserRepository = require('../repositories/userRepository');
-const CartRepository = require('../repositories/cartRepository');
 const utils = require("../utils")
-const nodemailer = require("nodemailer")
+const transporter = require("../config/nodemailerConfig.js")
 
 // Instanciando clases
 const userRepository = new UserRepository();
-const cartRepository = new CartRepository()
 
 // Función para obtener todos los usuarios
 async function getAllUsers() {
@@ -103,16 +101,9 @@ async function deleteInactiveUsers(userIds) {
 
 async function sendDeletionEmails(users) {
   try {
-    const transporter = nodemailer.createTransport({
-      service: "Gmail",  
-      auth: {
-          user: process.env.USER, 
-          pass: process.env.PASS 
-      }
-    });
     for (const user of users) {
       const mailOptions = {
-        from: `${process.env.GMAIL_USER}`,
+        from: `${process.env.USER}`,
         to: user.email,
         subject: 'Eliminación de cuenta por inactividad',
         text: `Hola ${user.first_name}, lamentamos informarte que tu cuenta ha sido eliminada debido a la inactividad. Si deseas volver a utilizar nuestros servicios, por favor, regístrate nuevamente.`,

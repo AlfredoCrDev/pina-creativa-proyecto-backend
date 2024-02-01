@@ -26,9 +26,6 @@ const jwtOptions = {
   secretOrKey : process.env.SECRET_OR_KEY,
 }
 
-// const userManager = new UserManager();
-// const cartManager = new CartManager()
-
 const LocalStrategy = local.Strategy;
 // const GitHubStrategy = git.Strategy;
 const initializaPassport = () => {
@@ -95,34 +92,6 @@ const initializaPassport = () => {
       }
   }
   ))
-
-  // passport.use("current", new JwtStrategy({
-  //   jwtFromRequest: ExtractJwt.fromExtractors([cookieExtractor]),
-  //   secretOrKey: process.env.SECRET_OR_KEY,
-  // }, async (payload, done) => {
-    
-  //   try {
-  //     /* console.log('Current JWT Strategy - Payload:', payload); */
-  //     const user = await userService.getUserByEmail(payload.user.email);
-  //     if (!user) {
-  //       return done(null, false);
-  //     }
-  //     // Verificar si el usuario recuperado coincide con la estructura esperada en el DTO
-  //     /* const userDTO = new UserDTO(user); */ // Crear un DTO a partir del usuario
-  //     const userDTO = {
-  //       email: user.email, // Asegúrate de incluir el email u otra información necesaria
-  //       nombre: user.nombre, // Agrega el campo 'nombre' al objeto userDTO
-  //       apellido: user.apellido,
-  //       carrito: user.cart,
-  //       rol: user.rol,
-  //     };
-  //     /* console.log("por aqui pasa", userDTO); */
-  //     /* console.log("token de passport", token)  */
-  //     return done(null, userDTO); // Pasar el DTO al done
-  //   } catch (err) {
-  //     return done(err, false);
-  //   }
-  // }));
 
 }
 

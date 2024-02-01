@@ -84,7 +84,8 @@ class ProductController {
     try {
 
       const deletedProduct = await productService.deleteProduct(productId, userEmail, userRol);
-      if(deletedProduct.deletedCount > 0){
+      console.log("CONTROLLER", deletedProduct);
+      if(deletedProduct.status === "success"){
         res.status(200).json({ status: "success", deletedProduct });
       } else {
         req.logger.warn("Error al tratar de eliminar el producto")

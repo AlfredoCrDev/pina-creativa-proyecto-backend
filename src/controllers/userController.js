@@ -1,7 +1,7 @@
 const userService = require('../services/userService');
 const utils = require("../utils")
 const passport = require("passport")
-const nodemailer = require("nodemailer")
+const transporter = require("../config/nodemailerConfig.js")
 const path = require("path");
 
 
@@ -139,15 +139,8 @@ async createUser(req, res) {
     let token = utils.generateToken(user);
     const url = `http://localhost:8080/reset-password?token=${token}&email=${email}`;
 
-    const transporter = nodemailer.createTransport({
-      service: "Gmail",  
-      auth: {
-          user: process.env.USER, 
-          pass: process.env.PASS 
-      }
-    });
     const mailOptions = {
-      from: `"Recuperación de contraseña" <${process.env.GMAIL_USER}>`,
+      from: `"Recuperación de contraseña" <${process.env.USER}>`,
       to: email,
       subject: "Restablecer Contraseña",
       text: `Haz clic en este enlace para restablecer tu contraseña:\n\n ${url}\n\n

@@ -1,5 +1,5 @@
 const ProductRepository = require('../repositories/productRepository');
-const utils = require("../utils")
+const transporter = require("../config/nodemailerConfig.js")
 const productRepository = new ProductRepository();
 
 // Función para obtener todos los productos
@@ -62,11 +62,22 @@ async function deleteProduct(productId, userEmail, userRole) {
     if (!product) {
       throw new Error('Producto no encontrado');
     }
+
     // Comprobar si el usuario tiene permisos para borrar este producto
     if (userRole === 'admin' || (userRole === 'premium' && product.owner === userEmail)) {
       // El admin puede borrar cualquier producto
       // El usuario premium solo puede borrar sus propios productos
-      await productRepository.deleteProduct(productId);
+
+      // Ya que son 2 promesas las trabajo en paralelo con Promise.all
+      await Promise.all([
+        productRepository.deleteProduct(productId),
+        transporter.sendMail({
+          from: process.env.USER,
+          to: product.owner,
+          subject: 'Producto Eliminado',
+          text: `Hola, lamentamos informarte que tu producto "${product.title}" ha sido eliminado.`,
+        })
+      ]);
       return { 
         status: 'success', 
         message: 'Producto eliminado correctamente' 
@@ -79,6 +90,7 @@ async function deleteProduct(productId, userEmail, userRole) {
     }
   } catch (error) {
     // Manejar otros errores
+    console.error(`Error en ProductService.deleteProduct: ${error}`);
     throw new Error(`Error en ProductService.deleteProduct: ${error.message}`);
   }
 }

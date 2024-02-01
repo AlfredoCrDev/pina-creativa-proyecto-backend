@@ -177,7 +177,7 @@ if (formularioEliminar) {
     const data = await response.json()
     if (response.ok) {
       eliminarProductoDeLaTabla(productId);
-      alert("Producto eliminado con éxito");
+      alert(data.deletedProduct.message);
       formularioEliminar.reset();
       window.location.reload();
     } else { 
