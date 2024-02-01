@@ -19,6 +19,8 @@ router.post("/reset-password", userController.updatePassword)
 // router.put('/premium/:uid', utils.passportCall('jwt'), utils.isAdmin, userController.toggleUserRole);
 router.put('/premium/:uid', userController.toggleUserRole);
 router.post("/:uid/documents", userController.uploadDocuments);
+router.delete('/clean/inactive-users', userController.deleteInactiveUsers);
+
 
 
 

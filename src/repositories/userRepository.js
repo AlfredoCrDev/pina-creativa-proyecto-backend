@@ -118,6 +118,39 @@ class UserRepository {
     }
   }
 
+  async getUsersInactiveForDays(days) {
+    try {
+      const currentDate = new Date();
+      const inactiveDate = new Date(currentDate - days);
+
+      const inactiveUsers = await userModel.find({
+        last_connection: { $lt: inactiveDate },
+      });
+
+      return inactiveUsers;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async getUsersByIds(userIds) {
+    try {
+      const users = await userModel.find({ _id: { $in: userIds } });
+      return users;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async deleteInactiveUsers(userIds) {
+    try {
+      const result = await userModel.deleteMany({ _id: { $in: userIds } });
+      return result;
+    } catch (error) {
+      throw error;
+    }
+  }
+
 }
 
 module.exports = UserRepository;

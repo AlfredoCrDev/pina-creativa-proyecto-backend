@@ -19,10 +19,10 @@
         <button id="logoutButton">Cerrar Sesión</button>
     </div>
     <!-- Formulario para eliminar usuario -->
-    <form id="formulario-eliminar">
+    <form id="formulario-eliminar-usuario">
         <h2>Eliminar Usuario</h2>
-        <label for="idProduct">Ingrese el ID del Usuario:</label>
-        <input type="text" id="idProduct" name="idProduct" class="login-input" required>
+        <label for="userId">Ingrese el correo del Usuario:</label>
+        <input type="email" id="userEmail" name="userId" class="login-input" required>
         <button type="submit">Eliminar Producto</button>
     </form>
 
@@ -46,7 +46,7 @@
                 <td>{{this.email}}</td>
                 <td>{{this.rol}}</td>
                 <td>
-                  <button class="btn-changeRol" data-user-id="{{this._id}}">Cambiar</button>
+                    <button class="btn-changeRol" data-user-id="{{this._id}}">Cambiar</button>
                 </td>
             </tr>
             {{/each}}

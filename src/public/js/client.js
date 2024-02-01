@@ -114,19 +114,17 @@ if(formRegister){
         'Content-Type': 'application/json',
       },
     })
+    const data = await response.json();
     if (response.ok) {
-      const data = await response.json();
       if (data.redirect) {
         alert("Usuario Creado Con Exito, sera redirigido al inicio!");
         window.location.assign(data.redirect);
       } else {
-        console.log("Respuesta exitosa:", data);
+        console.log("Respuesta exitosa:");
       }
     } else {
-      console.log("Error en la solicitud:", response.status, response.statusText);
-      const errorMessage = await response.text();
-      console.log("Mensaje de error:", errorMessage);
-      alert("Error en la solicitud: " + errorMessage);
+      console.warn(data.message);
+      alert(data.message);
     }
   })
 }
@@ -486,65 +484,36 @@ const uploadForm = document.getElementById('uploadForm')
   });
 }
 
-  
-// function uploadFiles() {
-//   const form = document.getElementById('uploadForm');
-//   const formData = new FormData(form);
-//   const userId = document.body.getAttribute('data-user');
-//   console.log(formData);
-//   // Reemplaza la URL con la ruta de tu servidor
-//   fetch(`/${userId}/documents`, {
-//       method: 'POST',
-//       body: formData,
-//   })
-//   .then(response => response.json())
-//   .then(data => {
-//       console.log(data);
-//       // Maneja la respuesta del servidor según tus necesidades
-//   })
-//   .catch(error => {
-//       console.error('Error:', error);
-//   });
-// }
+function eliminarUsuarioDeLaTabla(userID) {
+  const filaAEliminar = document.querySelector(`body > table > tbody > tr[data-id="${userID}"]`);
+  if (filaAEliminar) {
+    filaAEliminar.remove();
+  }
+}
 
-  // FUNCION PARA IR A CARRITO CON BOTON 
-  // const goToCartButtons = document.querySelectorAll('.go-to-cart-button');
-  // if(goToCartButtons){
-  //   const cartId = document.body.getAttribute('data-cart');
+// Manejar el evento submit del formulario de eliminar
+const formularioEliminarUsuario = document.getElementById("formulario-eliminar-usuario");
+if (formularioEliminarUsuario) {
+  formularioEliminarUsuario.addEventListener("submit", async (e) => {
+    e.preventDefault();
 
-  //   goToCartButtons.forEach(function(button) {
-  //     button.addEventListener('click', async function(event) {
-  //       event.preventDefault();
+    const userEmail = document.getElementById("userEmail").value;
 
-  //       // Realizar la petición POST usando Fetch
-  //       const response = await fetch(`/cart/${cartId}/`, {
-  //         method: 'GET',
-  //         headers: {
-  //           'Content-Type': 'application/json',
-  //         },
-  //         // body: JSON.stringify({}),
-  //       })
-  //       if (response.ok) {
-  //         window.location.assign(`/carrito/${cartId}`);;
-  //       } else {
-  //         console.error("Error al mostrar el carrito");
-  //         alert("Error al mostrar el carrito");
-  //       }
-  //     })
-  //   });
-  // }
-
-
-// Chat 
-// const formularioMensaje = document.getElementById("formulario-mensaje");
-// formularioMensaje.addEventListener("submit", (e) => {
-//   e.preventDefault();
-
-//   const usuario = document.getElementById("usuario").value;
-//   const mensaje = document.getElementById("mensaje").value;
-
-//   const newMessage = {
-//     user: usuario,
-//     message: mensaje,
-//   };
-// });
+    const response = await fetch(`/users/${userEmail}`, {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+      // body: JSON.stringify({ userEmail, userRol })
+    });
+    const data = await response.json()
+    if (response.ok) {
+      eliminarUsuarioDeLaTabla(userEmail);
+      alert(data.message);
+      formularioEliminarUsuario.reset();
+      window.location.reload();
+    } else { 
+      // Error al eliminar el producto
+      alert(data.message);
+      window.location.reload();
+    }
+  });
+}

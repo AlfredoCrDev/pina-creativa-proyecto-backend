@@ -1,6 +1,7 @@
 const UserRepository = require('../repositories/userRepository');
 const CartRepository = require('../repositories/cartRepository');
 const utils = require("../utils")
+const nodemailer = require("nodemailer")
 
 // Instanciando clases
 const userRepository = new UserRepository();
@@ -75,6 +76,56 @@ async function uploadDocuments(userId, documents){
   }
 }
 
+async function getUsersInactiveForDays(days) {
+  try {
+    const inactiveUsers = await userRepository.getUsersInactiveForDays(days);
+    return inactiveUsers;
+  } catch (error) {
+    throw error;
+  }
+}
+
+async function deleteInactiveUsers(userIds) {
+  try {
+    const deletedUsers = await userRepository.getUsersByIds(userIds);
+
+    // Elimina usuarios inactivos de la base de datos
+    await userRepository.deleteInactiveUsers(userIds);
+
+    // Envía correos electrónicos a usuarios eliminados
+    await sendDeletionEmails(deletedUsers);
+
+    return deletedUsers;
+  } catch (error) {
+    throw error;
+  }
+}
+
+async function sendDeletionEmails(users) {
+  try {
+    const transporter = nodemailer.createTransport({
+      service: "Gmail",  
+      auth: {
+          user: process.env.USER, 
+          pass: process.env.PASS 
+      }
+    });
+    for (const user of users) {
+      const mailOptions = {
+        from: `${process.env.GMAIL_USER}`,
+        to: user.email,
+        subject: 'Eliminación de cuenta por inactividad',
+        text: `Hola ${user.first_name}, lamentamos informarte que tu cuenta ha sido eliminada debido a la inactividad. Si deseas volver a utilizar nuestros servicios, por favor, regístrate nuevamente.`,
+      };
+
+      // Envía el correo electrónico
+      await transporter.sendMail(mailOptions);
+    }
+  } catch (error) {
+    throw error;
+  }
+}
+
 module.exports = {
   getAllUsers,
   getUserByEmail,
@@ -84,5 +135,7 @@ module.exports = {
   getUserById,
   updatePassword,
   toggleUserRole,
-  uploadDocuments
+  uploadDocuments,
+  getUsersInactiveForDays,
+  deleteInactiveUsers
 };

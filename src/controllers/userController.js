@@ -106,10 +106,14 @@ async createUser(req, res) {
   async deleteUser(req, res) {
     const userEmail = req.params.id;
     try {
+      const user = await userService.getUserByEmail(userEmail);
+      if(!user){
+        return res.status(400).json({ status: "error", message: `No se encontro al usuario "${userEmail}"` })
+      }
       const result = await userService.deleteUser(userEmail);
       if (!result) throw new Error('No se pudo eliminar el usuario');
       req.logger.info(`Se ha eliminado correctamente al usuario con la dirección de correo "${userEmail}"`);
-      res.status(200).json({ status:"success", message: 'User deleted successfully', result });
+      res.status(200).json({ status:"success", message: 'Usuario eliminado con éxito', result });
     } catch (error) {
       req.logger.error(`Error al intentar borrar el usuario con la dirección de correo "${userEmail}".`, error);
       res.status(500).json({ error: error.message });
@@ -251,6 +255,24 @@ async createUser(req, res) {
       res.status(200).send({ status: "success", message: "Archivos Guardados" });
     } catch (error) {
       req.logger.error("Error al tratar de subir la documentacion");
+      res.status(500).json({ status: 'error', error: 'Error interno del servidor' });
+    }
+  }
+
+  async deleteInactiveUsers(req, res) {
+    try {
+      const inactiveTime  = 30 * 60 * 1000;  // 30 minutos en ms
+      const inactiveUsers = await userService.getUsersInactiveForDays(inactiveTime);
+
+      if (inactiveUsers.length > 0) {
+        const userIds = inactiveUsers.map(user => user._id);
+        await userService.deleteInactiveUsers(userIds);
+
+        res.status(200).json({ status: 'success', message: 'Usuarios inactivos eliminados' });
+      } else {
+        res.status(200).json({ status: 'success', message: 'No hay usuarios inactivos para eliminar' });
+      }
+    } catch (error) {
       res.status(500).json({ status: 'error', error: 'Error interno del servidor' });
     }
   }
