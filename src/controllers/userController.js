@@ -269,6 +269,8 @@ async createUser(req, res) {
       res.status(500).json({ status: 'error', error: 'Error interno del servidor' });
     }
   }
+
 }
+
 
 module.exports = UserController;

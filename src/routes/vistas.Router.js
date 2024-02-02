@@ -6,7 +6,7 @@ const productRepository = new ProductRepository();
 const UserRepository = require("../repositories/userRepository");
 const userRepository = new UserRepository();
 const cartService = require("../services/cartService");
-const upload = require("../multer/multerConfig")
+
 
 // VISTAS
 router.get("/register", async(req, res) => {

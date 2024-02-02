@@ -1,11 +1,8 @@
 const passport = require("passport")
 const local = require("passport-local")
 const utils = require("../utils")
-// const UserManager = require("../Dao/userManager")
-// const CartManager = require("../Dao/cartManagerMDB")
-// const git = require("passport-github2")
+const git = require("passport-github2")
 const jwt = require("passport-jwt")
-// const config = require("./config.js")
 const userService = require("../services/userService")
 const userModel = require("../models/user.model.js")
 const {DateTime} = require("luxon")
@@ -27,7 +24,7 @@ const jwtOptions = {
 }
 
 const LocalStrategy = local.Strategy;
-// const GitHubStrategy = git.Strategy;
+const GitHubStrategy = git.Strategy;
 const initializaPassport = () => {
     passport.use("login", new LocalStrategy({
       usernameField: "email"
@@ -52,32 +49,31 @@ const initializaPassport = () => {
       }
     }));
 
-  //   passport.use("github", new GitHubStrategy({
-  //     clientID: config.clientId,
-  //     clientSecret: config.clientSecret,
-  //     callbackURL: "http://localhost:8080/api/sessions/githubcallback"
-  //   }, async(accessToken, refreshToken, profile, done) => {
-  //     try {
-  //       console.log(profile);
-  //       let user = await userManager.findEmailUser({email:profile._json.email})
-  //       if(!user){
-  //         let newUser = {
-  //           first_name: profile._json.name,
-  //           last_name: "",
-  //           email: profile._json.email,
-  //           age: 18,
-  //           password: "",
-  //           rol: "admin"
-  //       }
-  //       let result = await userManager.createUser(newUser)
-  //       done(null, result)
-  //     } else {
-  //       done(null, user);
-  //     }
-  //     } catch (error) {
-  //       return done(error)
-  //     }
-  //   }))
+    passport.use("github", new GitHubStrategy({
+      clientID: process.env.clientID,
+      clientSecret: process.env.clientSecret,
+      callbackURL: process.env.callbackURL
+    }, async(accessToken, refreshToken, profile, done) => {
+      try {
+        let user = await userService.getUserByEmail(profile._json.email)
+        if(!user){
+          console.log("Entre aqui");
+          let newUser = {
+            first_name: profile._json.name,
+            last_name: "",
+            email: profile._json.email,
+            age: "",
+            password: "",
+            rol: "admin"
+          }
+          user = await userService.createUser(newUser)
+        }
+        const token = utils.generateToken(user)
+        done(null, token)
+      } catch (error) {
+        return done(error)
+      }
+    }))
 
     // JWT
   passport.use('jwt', new JwtStrategy({
