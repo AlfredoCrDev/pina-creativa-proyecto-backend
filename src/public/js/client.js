@@ -517,3 +517,32 @@ if (formularioEliminarUsuario) {
     }
   });
 }
+
+const cleanBd = document.getElementById("cleanBd");
+if (cleanBd){
+  cleanBd.addEventListener('click', async (e)=>{
+    e.preventDefault();
+    const confirmacion = confirm('¿Está seguro que desea limpiar la base de datos?');
+    try {
+      if (confirmacion === true){
+        const response = await fetch('/users/clean/inactive-users', {
+          method:'DELETE',
+          headers:{ 'Content-Type': 'application/json'}
+        })
+        const data = await response.json()
+        if(response.ok){
+          alert(data.message);
+          window.location.reload();
+        }
+        else{
+          alert(data.message)
+          window.location.reload();
+        }
+    } else {
+      return false;
+    }   
+    } catch (error) {
+      console.log(error);
+    }    
+  });
+}

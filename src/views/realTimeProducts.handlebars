@@ -8,16 +8,17 @@
 </head>
 
 <body>
-
-    <h1>Lista de Productos en tiempo Real</h1>
-    <input type="hidden" id="user" value={{user.email}}>
-    <input type="hidden" id="rol" value={{user.rol}}>
-    <h3>Usuario: {{user.email}}</h3>
-    <h3>Rol: {{user.rol}}</h3>
-    <a href="/profile">Volver al perfil</a></br>
-    <a href="/products">Ir a tienda</a></br>
-    <div class="go-to-logout-products">
-        <button id="logoutButton">Cerrar Sesión</button>
+    <div class="infoUser">
+        <h1>Lista de Productos en tiempo Real</h1>
+        <input type="hidden" id="user" value={{user.email}}>
+        <input type="hidden" id="rol" value={{user.rol}}>
+        <h3>Usuario: {{user.email}}</h3>
+        <h3>Rol: {{user.rol}}</h3>
+        <a href="/profile">Volver al perfil</a></br>
+        <a href="/products">Ir a tienda</a></br>
+        <div>
+            <button id="logoutButton">Cerrar Sesión</button>
+        </div>
     </div>
     <!-- Formulario para agregar un producto -->
     <form id="formulario-agregar">
@@ -98,8 +99,6 @@
         <button type="submit">Eliminar Producto</button>
     </form>
 
-    {{!--
-    <script src="/socket.io/socket.io.js"></script> --}}
     <script src="/js/client.js"></script>
 
 </body>
