@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon src/server.js",
+    "start": "node src/server.js",
+    "dev": "nodemon src/server.js",
     "testproducts": "mocha tests/products.test.js --timeout 5000",
     "testusers": "mocha tests/users.test.js --timeout 5000",
     "testcarts": "mocha tests/carts.test.js --timeout 5000"
